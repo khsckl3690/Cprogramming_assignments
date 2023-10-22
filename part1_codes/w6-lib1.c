@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_STR 100
 #define MAX_MEM 100
@@ -18,6 +19,7 @@ typedef struct struct_borrow {
 } Sborrow;
 
 void read_op(Sborrow*);
+void ymd(char*, Sborrow*);
 void save_print(Sborrow *, int);
 
 main() {
@@ -55,8 +57,21 @@ void read_op(Sborrow* p) {
 	strcpy(p->telephone, str);
 
 	printf("Enter the due date: ");
-	scanf("%4d %2d %2d", &p->due.year, &p->due.month, &p->due.day);
+	gets(str);
+	ymd(str, p);
+}
 
+void ymd(char* str, Sborrow* p) {
+	char A[MAX_STR];
+
+	strncpy(A, str, 4); A[4] = '\0';
+	p->due.year= atoi(A);
+
+	strncpy(A, str+4, 2); A[2]='\0';
+	p->due.month=atoi(A);
+	
+	strncpy(A, str+6, 2); A[2]='\0';
+	p->due.day=atoi(A);
 }
 
 void save_print(Sborrow *A, int num) {
