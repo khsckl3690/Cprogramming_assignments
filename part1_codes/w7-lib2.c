@@ -13,18 +13,18 @@ typedef struct struct_date {
 } Sdate;
 
 typedef struct struct_borrow {
-	char booktitle[MAX_STR]; // Ã¥ Á¦¸ñ
-	char name[MAX_STR]; // ´ëÃâÀÚ ÀÌ¸§
-	char telephone[MAX_STR]; // ÀüÈ­¹øÈ£(¹®ÀÚ¿­·Î ÀúÀå)
-	Sdate due; // ¹Ý³³±âÇÑ
+	char booktitle[MAX_STR]; // ì±… ì œëª©
+	char name[MAX_STR]; // ëŒ€ì¶œìž ì´ë¦„
+	char telephone[MAX_STR]; // ì „í™”ë²ˆí˜¸(ë¬¸ìžì—´ë¡œ ì €ìž¥)
+	Sdate due; // ë°˜ë‚©ê¸°í•œ
 } Sborrow;
 
-Sborrow A[MAX_MEM], * p = A;
+Sborrow A[MAX_MEM];
 int num = 0;
 
 int com_read(void);
 void read_1(void);
-void read_2(Sborrow*);
+void read_2(void);
 void save_print(void);
 void oper_3(void);
 void oper_4(void);
@@ -67,42 +67,42 @@ void read_1(void) {
 	if (*str != '\0') {
 		strcpy(A[num].booktitle, str);
 		
-		read_2(p);
+		read_2();
 		getchar();
 
-		num++; p++;
+		num++;
 	}
 	else printf("Nothing entered. ");
 }
 
-void read_2(Sborrow* p) {
+void read_2(void) {
 	char str[MAX_STR];
 
 	printf("Enter the borrower: ");
 	gets(str);
-	strcpy(p->name, str);
+	strcpy(A[num].name, str);
 
 	printf("Enter the phone number: ");
 	gets(str);
-	strcpy(p->telephone, str);
+	strcpy(A[num].telephone, str);
 
 	printf("Enter the due date: ");
-	scanf("%4d %2d %2d", &p->due.year, &p->due.month, &p->due.day);
+	scanf("%4d %2d %2d", &A[num].due.year, &A[num].due.month, &A[num].due.day);
 
 }
 
 void save_print(void) {
-	Sborrow* p = A;
+	Sborrow* books = A;
 
-	printf("** Borrowed books **\n");
+	printf("** Borrowed books **");
 	for (int i = 0; i < num; i++) {
-		printf("\n");
-		printf("[%d]Book title: %s\n", i+1, p->booktitle);
-		printf("   Borrower: %s\n", p->name);
-		printf("   Telephone: %s\n", p->telephone);
-		printf("   Due date: %d. %02d. %02d", p->due.year, p->due.month, p->due.day);
+		printf("\n\n");
+		printf("[%d]Book title: %s\n", i+1, books->booktitle);
+		printf("   Borrower: %s\n", books->name);
+		printf("   Telephone: %s\n", books->telephone);
+		printf("   Due date: %d. %02d. %02d", books->due.year, books->due.month, books->due.day);
 
-		p++;
+		books++;
 	}
 }
 
@@ -119,12 +119,13 @@ int com_read(void) {
 }
 
 void oper_3(void) {
-	char str[MAX_STR], *p;
+	char str[MAX_STR];
 	int n = 0;
 
 	printf("Enter the keyword of the title to search: ");
 	gets(str);
-	for (int i=0; i<num; i++)
+	for (int i=0; i<num; i++){
+		printf("\n\n");
 		if (strstr(A[i].booktitle, str)) {
 			printf("[%d] %s, %s, %d.%02d.%02d\n", 
 				++n,
@@ -134,6 +135,7 @@ void oper_3(void) {
 				A[i].due.month,
 				A[i].due.day);
 		}
+	}
 
 }
 
