@@ -5,11 +5,6 @@
 
 #define NUM 10
 
-void array_init(int n, int a[]) {
-	for (int i = 0; i <= 10; i++)
-		a[i] = 0;
-}
-
 void star(int n) {
 	while (n-- > 0)
 		printf("*");
@@ -24,7 +19,7 @@ void print(int n, int a[]) {
 	}
 }
 
-void arraying(int n, int a[]) {
+void array_init(int n, int a[]) {
 	srand((unsigned int)time(NULL));
 	for (int i = 0; i < 100; i++)
 		a[casing()]++;
@@ -40,8 +35,7 @@ int casing(void) {
 }
 
 main() {
-	int a[NUM+1];
+	int a[NUM+1]={0};
 	array_init(NUM, a);
-	arraying(NUM, a);
 	print(NUM, a);
 }
