@@ -1,22 +1,19 @@
 #include <stdio.h>
 #define N 5
 
-void printArray(int A[][5], int n);
-
-void spiralArray(int A[][5], int n) {
-	int * p=A;
-	int i;
-	for (i = 0; i < n; i++)
+void spiralArray(int A[][N], int n) {
+	int * p=A[0];
+	for (int i = 0; i < n; i++)
 	{
 		*p=i+1;
 		p++;
 	}
-	i--;
 	p--;
-	int code = 0, num = 5;
-	for (i; i >0; i--) {	
+
+	int code = 0, num = n;
+	for (int i=0; i <n-1; i++) {	
 		for (int j = 0; j < 2; j++) {
-			for (int k = 0; k < i; k++) {
+			for (int k = 0; k < n-i-1; k++) {
 				if (code % 4 == 0)
 					p += n;
 				else if (code % 4 == 1)
@@ -24,6 +21,7 @@ void spiralArray(int A[][5], int n) {
 				else if (code % 4 == 2)
 					p -= n;
 				else p += 1;
+				
 				num++;
 				*p = num;
 			}
@@ -33,19 +31,18 @@ void spiralArray(int A[][5], int n) {
 }
 
 void printArray(int A[][5], int n) {
-	int* p = A;
+	int* p = A[0];
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
-			printf("%03d ", *p);
-			if (i == n-1 && j == n-1);
-			else p++;
+			printf("%2d ", *p);
+			p++;
 		}
 		printf("\n\n");
 	}
 }
 
 main() {
-	int A[5][5];
+	int A[N][N];
 	spiralArray(A, N);
 	printArray(A, N);
 }
