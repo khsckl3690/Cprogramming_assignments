@@ -227,8 +227,14 @@ void oper_7(void) {
 
 	while (fgets(bf, MAX_STR, fp) !=NULL) {
 		strcpy(A[num].booktitle, bf);
+		A[num].booktitle[strcspn(A[num].booktitle, "\n")] = '\0';
+
 		fgets(A[num].name, MAX_STR, fp);
+		A[num].name[strcspn(A[num].name, "\n")] = '\0';
+		
 		fgets(A[num].telephone, MAX_STR, fp);
+		A[num].telephone[strcspn(A[num].telephone, "\n")] = '\0';
+
 		fscanf(fp, "%4d%2d%2d", 
 			&A[num].due.year, &A[num].due.month, &A[num].due.day);
 
