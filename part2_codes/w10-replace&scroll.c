@@ -9,6 +9,9 @@ void reorder(char*, int);
 void scroll(char*, int);
 char* replaceText(char*, char*, char*, int);
 
+//additional scroll module
+void scroll_2(char*, int);
+
 main() {
 	char* text, * target, * replace;
 	text = (char*)malloc(sizeof(char) * MAX_STR);
@@ -21,7 +24,7 @@ main() {
 
 	text=replaceText(text, target, replace, MAX_STR);
 
-	scroll(text, 3);
+	scroll(text, 6);
 }
 
 void reorder(char *p, int len) {
@@ -49,7 +52,7 @@ void scroll(char* str, int n)
 			system("cls");
 			puts(A);
 			printf("\n");
-			Sleep(100);
+			Sleep(300);
 			reorder(A, len);
 		}
 }
@@ -75,8 +78,21 @@ char* replaceText(char* text, char* target, char* replace, int maxStr)
 		*tex_ptr = '\0';
 	}
 	
-	
-	char* answer = (char*)malloc(sizeof(char)*maxStr);
-	strcpy(answer, text);
-	return (answer);
+	return (text);
+}
+
+//additional scroll module
+void scroll_2(char* str, int n) {
+	int len = strlen(str);
+	char A[MAX_STR];
+	strcpy(A, str);
+
+	while (n-- > 0) {
+		for (int i = 0; i < len; i++) {
+			system("cls");
+			for (int j = 0; j < len; j++)
+				printf("%c", A[(i + j)%len]);
+			Sleep(200);
+		}
+	}
 }
