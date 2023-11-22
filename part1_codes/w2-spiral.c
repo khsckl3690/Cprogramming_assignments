@@ -30,7 +30,7 @@ void spiralArray(int A[][N], int n) {
 	}
 }
 
-void printArray(int A[][5], int n) {
+void printArray(int A[][N], int n) {
 	int* p = A[0];
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {

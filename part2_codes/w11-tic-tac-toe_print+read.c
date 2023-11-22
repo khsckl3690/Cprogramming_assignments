@@ -62,7 +62,7 @@ int read_op(int max_columns) {
 	printf("%s", str);
 	fgets(buf, 2, stdin);
 
-	if (strlen(buf) && charcheck(*buf)) {
+	if (strlen(buf) == 1 && charcheck(*buf)) {
 		a = atoi(buf) - 1;
 		board[a / 3][a % 3] = 1;
 	}
